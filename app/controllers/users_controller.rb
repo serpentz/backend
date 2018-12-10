@@ -47,7 +47,12 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   def destroy
-    @user.destroy
+
+     @messages = Message.where(user_id: @user.id)
+
+     @messages.destroy_all
+     @user.destroy
+     
   end
 
   private

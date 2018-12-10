@@ -22,6 +22,7 @@ class MessagesController < ApplicationController
     message.chatroom_id = chatroom.id
 
     if message.save
+    
       serialized_data = ActiveModelSerializers::Adapter::Json.new(
         MessageSerializer.new(message)
       ).serializable_hash
