@@ -5,8 +5,8 @@ Rails.application.configure do
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
-   config.action_cable.url = [/ws:\/\/*/, /wss:\/\/*/]
-  config.action_cable.allowed_request_origins = [/http:\/\/*/, /https:\/\/*/]
+   config.action_cable.url = "*"
+  config.action_cable.allowed_request_origins = "*"
 
   # Do not eager load code on boot.
   config.eager_load = false
