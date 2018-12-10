@@ -1,11 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  user: 
-  event: 
-  content: MyString
+  name: MyString
 
 two:
-  user: 
-  event: 
-  content: MyString
+  name: MyString

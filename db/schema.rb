@@ -10,30 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_03_201320) do
+ActiveRecord::Schema.define(version: 2018_12_06_000413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "comments", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "event_id"
-    t.string "content"
+  create_table "chatroom_users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["event_id"], name: "index_comments_on_event_id"
-    t.index ["user_id"], name: "index_comments_on_user_id"
+    t.bigint "user_id"
+    t.bigint "chatroom_id"
   end
 
-  create_table "events", force: :cascade do |t|
-    t.bigint "user_id"
-    t.string "image_url"
-    t.string "description"
-    t.string "title"
-    t.datetime "date"
+  create_table "chatrooms", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_events_on_user_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "chatroom_id"
+    t.string "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chatroom_id"], name: "index_messages_on_chatroom_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -41,8 +43,8 @@ ActiveRecord::Schema.define(version: 2018_12_03_201320) do
     t.string "email"
     t.string "password"
     t.boolean "admin"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "messages", "chatrooms"
+  add_foreign_key "messages", "users"
 end

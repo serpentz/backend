@@ -33,6 +33,18 @@ class UsersController < ApplicationController
     end
   end
 
+   def login
+    @login_user = user_params
+    @user = User.find_by(username: @login_user['username'], password: @login_user['password'])
+
+    if @user
+      render json: @user, status: :found, location: @user
+    else
+      render json: {error: "User Not found"}
+    end
+
+  end
+
   # DELETE /users/1
   def destroy
     @user.destroy
